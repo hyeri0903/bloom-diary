@@ -1,10 +1,8 @@
 import { useState } from 'react'
-import { useEntries } from '../hooks/useEntries'
 import EntryCard from '../components/EntryCard'
 import ProofreadResult from '../components/ProofreadResult'
 
-export default function HistoryPage() {
-  const { entries, deleteEntry } = useEntries()
+export default function HistoryPage({ entries, deleteEntry }) {
   const [selected, setSelected] = useState(null)
 
   const handleDelete = (id) => {

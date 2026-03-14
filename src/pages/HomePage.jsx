@@ -1,32 +1,15 @@
-import { useState } from 'react'
 import DiaryEditor from '../components/DiaryEditor'
 import ProofreadResult from '../components/ProofreadResult'
-import { useEntries } from '../hooks/useEntries'
-import { getAIFeedback } from '../services/claude'
 
-export default function HomePage() {
-  const { createEntry, updateResult } = useEntries()
-  const [loading, setLoading] = useState(false)
-  const [error, setError] = useState(null)
-  const [currentEntry, setCurrentEntry] = useState(null)
-
-  const handleSubmit = async ({ title, body, level }) => {
-    setLoading(true)
-    setError(null)
-    setCurrentEntry(null)
-
-    try {
-      const entry = createEntry(title, body, level)
-      const result = await getAIFeedback(body, level)
-      updateResult(entry.id, result)
-      setCurrentEntry({ ...entry, result })
-    } catch (err) {
-      setError(err.message)
-    } finally {
-      setLoading(false)
-    }
-  }
-
+export default function HomePage({
+  title, setTitle,
+  body, setBody,
+  level, setLevel,
+  loading,
+  error, setError,
+  currentEntry,
+  onSubmit,
+}) {
   return (
     <div className="max-w-7xl mx-auto px-4 py-6 h-full">
       {/* Error banner */}
@@ -45,7 +28,13 @@ export default function HomePage() {
             <span>✏️</span> Your Diary
           </h2>
           <div className="flex-1 flex flex-col">
-            <DiaryEditor onSubmit={handleSubmit} loading={loading} />
+            <DiaryEditor
+              title={title} setTitle={setTitle}
+              body={body} setBody={setBody}
+              level={level} setLevel={setLevel}
+              loading={loading}
+              onSubmit={onSubmit}
+            />
           </div>
         </section>
 

@@ -1,17 +1,18 @@
-import { useState } from 'react'
 import LevelSelector from './LevelSelector'
 
-export default function DiaryEditor({ onSubmit, loading }) {
-  const [title, setTitle] = useState('')
-  const [body, setBody] = useState('')
-  const [level, setLevel] = useState('B2')
-
+export default function DiaryEditor({
+  title, setTitle,
+  body, setBody,
+  level, setLevel,
+  loading,
+  onSubmit,
+}) {
   const wordCount = body.trim() ? body.trim().split(/\s+/).length : 0
 
   const handleSubmit = (e) => {
     e.preventDefault()
     if (!body.trim()) return
-    onSubmit({ title, body, level })
+    onSubmit()
   }
 
   return (
