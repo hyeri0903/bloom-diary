@@ -8,6 +8,58 @@ const TABS = [
   { id: 'vocabulary', label: 'Vocabulary' },
 ]
 
+/**
+ * Finds all correction phrases in the text and returns an array of segments:
+ * [{ text: string, highlighted: boolean }, ...]
+ */
+function buildHighlightedSegments(text, grammar, vocabulary) {
+  // Collect all corrected phrases
+  const phrases = [
+    ...(grammar ?? []).map((g) => g.corrected),
+    ...(vocabulary ?? []).map((v) => v.suggestion),
+  ].filter(Boolean)
+
+  if (phrases.length === 0) return [{ text, highlighted: false }]
+
+  // Find all match ranges [start, end) for each phrase
+  const ranges = []
+  for (const phrase of phrases) {
+    let idx = 0
+    while (idx < text.length) {
+      const pos = text.indexOf(phrase, idx)
+      if (pos === -1) break
+      ranges.push([pos, pos + phrase.length])
+      idx = pos + phrase.length
+    }
+  }
+
+  if (ranges.length === 0) return [{ text, highlighted: false }]
+
+  // Sort and merge overlapping ranges
+  ranges.sort((a, b) => a[0] - b[0])
+  const merged = [ranges[0]]
+  for (let i = 1; i < ranges.length; i++) {
+    const last = merged[merged.length - 1]
+    if (ranges[i][0] < last[1]) {
+      last[1] = Math.max(last[1], ranges[i][1])
+    } else {
+      merged.push(ranges[i])
+    }
+  }
+
+  // Build segments
+  const segments = []
+  let cursor = 0
+  for (const [start, end] of merged) {
+    if (cursor < start) segments.push({ text: text.slice(cursor, start), highlighted: false })
+    segments.push({ text: text.slice(start, end), highlighted: true })
+    cursor = end
+  }
+  if (cursor < text.length) segments.push({ text: text.slice(cursor), highlighted: false })
+
+  return segments
+}
+
 export default function ProofreadResult({ result, level }) {
   const [activeTab, setActiveTab] = useState('corrected')
 
@@ -23,6 +75,11 @@ export default function ProofreadResult({ result, level }) {
 
   const grammarCount = result.grammar?.length ?? 0
   const vocabCount = result.vocabulary?.length ?? 0
+  const segments = buildHighlightedSegments(
+    result.corrected_text ?? '',
+    result.grammar,
+    result.vocabulary,
+  )
 
   return (
     <div className="flex flex-col h-full">
@@ -69,7 +126,15 @@ export default function ProofreadResult({ result, level }) {
       <div className="flex-1 overflow-y-auto">
         {activeTab === 'corrected' && (
           <div className="bg-green-50 border border-green-100 rounded-lg px-4 py-3 text-sm text-gray-800 leading-relaxed whitespace-pre-wrap">
-            {result.corrected_text}
+            {segments.map((seg, i) =>
+              seg.highlighted ? (
+                <mark key={i} className="bg-yellow-100 text-red-700 font-medium rounded px-0.5">
+                  {seg.text}
+                </mark>
+              ) : (
+                <span key={i}>{seg.text}</span>
+              )
+            )}
           </div>
         )}
         {activeTab === 'grammar' && (
