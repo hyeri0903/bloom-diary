@@ -1,7 +1,7 @@
 # English Diary with AI Proofreader
 
 Write a diary entry in English, choose your CEFR level, and get instant AI-powered grammar and vocabulary feedback — powered by Claude.
-
+Demo: https://bloom-diary-ten.vercel.app/
 ---
 
 ## Features
