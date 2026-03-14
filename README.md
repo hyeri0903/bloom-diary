@@ -33,7 +33,7 @@ Write a diary entry in English, choose your CEFR level, and get instant AI-power
 
 ```bash
 git clone <your-repo-url>
-cd english-diary
+cd bloom-diary
 npm install --legacy-peer-deps
 ```
 
