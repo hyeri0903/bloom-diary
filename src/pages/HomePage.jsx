@@ -1,0 +1,62 @@
+import { useState } from 'react'
+import DiaryEditor from '../components/DiaryEditor'
+import ProofreadResult from '../components/ProofreadResult'
+import { useEntries } from '../hooks/useEntries'
+import { getAIFeedback } from '../services/claude'
+
+export default function HomePage() {
+  const { createEntry, updateResult } = useEntries()
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState(null)
+  const [currentEntry, setCurrentEntry] = useState(null)
+
+  const handleSubmit = async ({ title, body, level }) => {
+    setLoading(true)
+    setError(null)
+    setCurrentEntry(null)
+
+    try {
+      const entry = createEntry(title, body, level)
+      const result = await getAIFeedback(body, level)
+      updateResult(entry.id, result)
+      setCurrentEntry({ ...entry, result })
+    } catch (err) {
+      setError(err.message)
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  return (
+    <div className="max-w-7xl mx-auto px-4 py-6 h-full">
+      {/* Error banner */}
+      {error && (
+        <div className="mb-4 px-4 py-3 bg-red-50 border border-red-200 text-red-700 text-sm rounded-lg flex justify-between items-start gap-3">
+          <span>{error}</span>
+          <button onClick={() => setError(null)} className="shrink-0 text-red-400 hover:text-red-600">✕</button>
+        </div>
+      )}
+
+      {/* Split layout */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 min-h-[calc(100vh-8rem)]">
+        {/* Left — Editor */}
+        <section className="bg-white border border-gray-200 rounded-2xl p-5 flex flex-col">
+          <h2 className="text-base font-semibold text-gray-800 mb-4 flex items-center gap-2">
+            <span>✏️</span> Your Diary
+          </h2>
+          <div className="flex-1 flex flex-col">
+            <DiaryEditor onSubmit={handleSubmit} loading={loading} />
+          </div>
+        </section>
+
+        {/* Right — Result */}
+        <section className="bg-white border border-gray-200 rounded-2xl p-5 overflow-y-auto">
+          <ProofreadResult
+            result={currentEntry?.result ?? null}
+            level={currentEntry?.level}
+          />
+        </section>
+      </div>
+    </div>
+  )
+}
