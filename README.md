@@ -2,7 +2,7 @@
 
 Write a diary entry in English, choose your CEFR level, and get instant AI-powered grammar and vocabulary feedback — powered by Claude.
 
-▶️ Demo: https://bloom-diary-ten.vercel.app/
+▶️ Demo: https://bloom-english-diary.vercel.app/
 
 
 ---
