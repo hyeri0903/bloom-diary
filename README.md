@@ -25,7 +25,7 @@ Write a diary entry in English, choose your CEFR level, and get instant AI-power
 |----------|-----------------------------------|
 | Frontend | React 18, Tailwind CSS v4, Vite   |
 | Routing  | React Router v6                   |
-| AI       | Claude API (`claude-sonnet-4-6`)  |
+| AI       | Groq API (`llama-3.3-70b-versatile`)  |
 | Storage  | `localStorage` (Phase 1)          |
 
 ---
