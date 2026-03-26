@@ -5,7 +5,7 @@ import HomePage from './pages/HomePage'
 import HistoryPage from './pages/HistoryPage'
 import { useEntries } from './hooks/useEntries'
 import { getAIFeedback } from './services/claude'
-import { Analytics } from "@vercel/analytics/next"
+import { Analytics } from "@vercel/analytics/react"
 
 export default function App() {
   // Write tab state — lifted here so it survives route changes

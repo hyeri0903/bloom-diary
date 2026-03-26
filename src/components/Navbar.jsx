@@ -15,7 +15,7 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-4 h-14 flex items-center justify-between">
         <Link to="/" className="flex items-center gap-2 font-semibold text-gray-900">
           <span className="text-xl">📓</span>
-          <span>English Diary</span>
+          <span>Bloom English Diary</span>
         </Link>
         <nav className="flex gap-1">
           <Link to="/" className={linkClass('/')}>

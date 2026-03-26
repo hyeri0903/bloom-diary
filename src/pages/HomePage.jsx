@@ -46,6 +46,8 @@ export default function HomePage({
           />
         </section>
       </div>
+      {/* Copyright */}
+      <p className="text-center text-xs text-gray-400 mt-4">© 2026 hazy. All rights reserved.</p>
     </div>
   )
 }
