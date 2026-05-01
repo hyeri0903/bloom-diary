@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Navbar from './components/Navbar'
+import MarqueeBanner from './components/MarqueeBanner'
 import HomePage from './pages/HomePage'
 import HistoryPage from './pages/HistoryPage'
 import { useEntries } from './hooks/useEntries'
@@ -38,8 +39,9 @@ export default function App() {
 
   return (
     <BrowserRouter>
-      <div className="min-h-screen bg-gray-50 flex flex-col">
+      <div className="min-h-screen bg-bloom-bg flex flex-col">
         <Navbar />
+        {/* <MarqueeBanner /> */}
         <main className="flex-1">
           <Routes>
             <Route

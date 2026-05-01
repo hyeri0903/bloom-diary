@@ -23,7 +23,7 @@ export default function DiaryEditor({
         placeholder="Title (optional)"
         value={title}
         onChange={(e) => setTitle(e.target.value)}
-        className="w-full px-3 py-2 border border-gray-300 rounded-lg text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent text-sm"
+        className="w-full px-3 py-2 border-2 border-bloom-ink bg-bloom-bg rounded-lg text-bloom-ink placeholder-bloom-muted focus:outline-none focus:ring-2 focus:ring-bloom-ink focus:ring-offset-1 text-sm font-sans"
       />
 
       {/* Body */}
@@ -32,9 +32,9 @@ export default function DiaryEditor({
           placeholder="Write your diary entry here in English..."
           value={body}
           onChange={(e) => setBody(e.target.value)}
-          className="flex-1 w-full px-3 py-3 border border-gray-300 rounded-lg text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent resize-none leading-relaxed min-h-64"
+          className="flex-1 w-full px-3 py-3 border-2 border-bloom-ink bg-bloom-bg rounded-lg text-bloom-ink placeholder-bloom-muted focus:outline-none focus:ring-2 focus:ring-bloom-ink focus:ring-offset-1 resize-none leading-relaxed min-h-64 font-sans"
         />
-        <p className="text-xs text-gray-400 mt-1 text-right">{wordCount} words</p>
+        <p className="text-xs text-bloom-muted mt-1 text-right font-sans">{wordCount} words</p>
       </div>
 
       {/* Level selector */}
@@ -44,11 +44,11 @@ export default function DiaryEditor({
       <button
         type="submit"
         disabled={!body.trim() || loading}
-        className="w-full py-3 bg-indigo-600 hover:bg-indigo-700 disabled:bg-indigo-300 text-white font-semibold rounded-lg transition-colors flex items-center justify-center gap-2"
+        className="w-full py-3 bg-bloom-ink hover:opacity-80 disabled:opacity-30 text-bloom-bg font-display uppercase tracking-widest rounded-full transition-opacity flex items-center justify-center gap-2 cursor-pointer disabled:cursor-not-allowed"
       >
         {loading ? (
           <>
-            <svg className="animate-spin h-4 w-4 text-white" fill="none" viewBox="0 0 24 24">
+            <svg className="animate-spin h-4 w-4 text-bloom-bg" fill="none" viewBox="0 0 24 24">
               <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
               <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z" />
             </svg>

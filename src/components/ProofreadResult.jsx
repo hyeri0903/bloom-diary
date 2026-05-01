@@ -65,10 +65,9 @@ export default function ProofreadResult({ result, level }) {
 
   if (!result) {
     return (
-      <div className="flex flex-col items-center justify-center h-full text-center text-gray-400 py-16 gap-3">
-        <span className="text-5xl">✍️</span>
-        <p className="text-base font-medium text-gray-500">Your proofread result will appear here</p>
-        <p className="text-sm">Write your diary and click <strong>Submit for Review</strong></p>
+      <div className="flex flex-col items-center justify-center h-full text-center py-16 gap-3">
+        <p className="font-display text-bloom-ink text-lg uppercase tracking-wider">Proofread Result</p>
+        <p className="text-sm text-bloom-muted font-sans">Write your diary and click <strong className="text-bloom-ink">Submit for Review</strong></p>
       </div>
     )
   }
@@ -85,14 +84,14 @@ export default function ProofreadResult({ result, level }) {
     <div className="flex flex-col h-full">
       {/* Header */}
       <div className="flex items-center justify-between mb-4">
-        <h2 className="font-semibold text-gray-800">Proofread Result</h2>
-        <span className="px-2.5 py-1 bg-indigo-100 text-indigo-700 text-xs font-bold rounded-full">
+        <h2 className="font-display text-bloom-ink uppercase tracking-wide text-base">Proofread Result</h2>
+        <span className="px-2.5 py-1 bg-bloom-ink text-bloom-bg text-xs font-display tracking-wider rounded-full">
           {level} Level
         </span>
       </div>
 
       {/* Tab bar */}
-      <div className="flex border-b border-gray-200 mb-4">
+      <div className="flex border-b-2 border-bloom-ink mb-4">
         {TABS.map((tab) => {
           const badge =
             tab.id === 'grammar' ? grammarCount :
@@ -102,17 +101,17 @@ export default function ProofreadResult({ result, level }) {
             <button
               key={tab.id}
               onClick={() => setActiveTab(tab.id)}
-              className={`flex items-center gap-1.5 px-4 py-2.5 text-sm font-medium border-b-2 transition-colors ${
+              className={`flex items-center gap-1.5 px-4 py-2.5 text-sm font-sans font-medium border-b-2 -mb-0.5 transition-colors cursor-pointer ${
                 activeTab === tab.id
-                  ? 'border-indigo-600 text-indigo-600'
-                  : 'border-transparent text-gray-500 hover:text-gray-700'
+                  ? 'border-bloom-ink text-bloom-ink'
+                  : 'border-transparent text-bloom-muted hover:text-bloom-ink'
               }`}
             >
               {tab.label}
               {badge !== null && (
-                <span className={`text-xs px-1.5 py-0.5 rounded-full font-semibold ${
-                  badge === 0 ? 'bg-green-100 text-green-700' :
-                  tab.id === 'grammar' ? 'bg-red-100 text-red-600' : 'bg-amber-100 text-amber-600'
+                <span className={`text-xs px-1.5 py-0.5 rounded-full font-semibold border ${
+                  badge === 0 ? 'border-[#1A6B3A] text-[#1A6B3A]' :
+                  tab.id === 'grammar' ? 'border-[#CC2233] text-[#CC2233]' : 'border-[#B85C00] text-[#B85C00]'
                 }`}>
                   {badge}
                 </span>
@@ -125,10 +124,10 @@ export default function ProofreadResult({ result, level }) {
       {/* Tab content */}
       <div className="flex-1 overflow-y-auto">
         {activeTab === 'corrected' && (
-          <div className="bg-green-50 border border-green-100 rounded-lg px-4 py-3 text-sm text-gray-800 leading-relaxed whitespace-pre-wrap">
+          <div className="bg-bloom-bg border-2 border-bloom-ink rounded-xl px-4 py-3 text-sm text-bloom-ink leading-relaxed whitespace-pre-wrap font-sans">
             {segments.map((seg, i) =>
               seg.highlighted ? (
-                <mark key={i} className="bg-yellow-100 text-red-700 font-medium rounded px-0.5">
+                <mark key={i} className="bg-bloom-hover text-[#CC2233] font-semibold rounded px-0.5">
                   {seg.text}
                 </mark>
               ) : (

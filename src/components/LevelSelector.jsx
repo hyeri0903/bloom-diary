@@ -8,21 +8,21 @@ const LEVELS = [
 export default function LevelSelector({ value, onChange }) {
   return (
     <div>
-      <p className="text-sm font-medium text-gray-700 mb-2">Your target level</p>
+      <p className="text-xs font-display uppercase tracking-wider text-bloom-muted mb-2">Target Level</p>
       <div className="flex gap-2 flex-wrap">
         {LEVELS.map((lv) => (
           <button
             key={lv.id}
             type="button"
             onClick={() => onChange(lv.id)}
-            className={`px-4 py-2 rounded-lg border text-sm font-semibold transition-all ${
+            className={`px-4 py-2 rounded-full border-2 text-sm transition-all cursor-pointer ${
               value === lv.id
-                ? 'bg-indigo-600 border-indigo-600 text-white shadow-sm'
-                : 'bg-white border-gray-300 text-gray-700 hover:border-indigo-400 hover:text-indigo-600'
+                ? 'bg-bloom-ink border-bloom-ink text-bloom-bg'
+                : 'bg-transparent border-bloom-ink text-bloom-ink hover:bg-bloom-hover'
             }`}
           >
-            <span className="block">{lv.label}</span>
-            <span className={`block text-xs font-normal ${value === lv.id ? 'text-indigo-200' : 'text-gray-400'}`}>
+            <span className="block font-display tracking-wide">{lv.label}</span>
+            <span className={`block text-xs font-sans font-normal ${value === lv.id ? 'opacity-70' : 'text-bloom-muted'}`}>
               {lv.desc}
             </span>
           </button>

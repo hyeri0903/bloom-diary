@@ -1,1 +1,20 @@
+@import url('https://fonts.googleapis.com/css2?family=Archivo+Black&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&display=swap');
 @import "tailwindcss";
+
+@theme {
+  --font-display: 'Archivo Black', sans-serif;
+  --font-sans: 'DM Sans', sans-serif;
+
+  --color-bloom-bg: #FAE8E6;
+  --color-bloom-surface: #FDF4F3;
+  --color-bloom-hover: #F5D5D0;
+  --color-bloom-ink: #180F0D;
+  --color-bloom-muted: #8B6360;
+
+  --animate-marquee: marquee 22s linear infinite;
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}

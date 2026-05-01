@@ -10,19 +10,19 @@ export default function EntryCard({ entry, onDelete }) {
   const hasResult = !!entry.result
 
   return (
-    <div className="bg-white border border-gray-200 rounded-xl p-4 hover:shadow-md transition-shadow">
+    <div className="bg-bloom-surface border-2 border-bloom-ink rounded-xl p-4 hover:bg-bloom-hover transition-colors">
       <div className="flex items-start justify-between gap-3 mb-2">
         <div className="flex-1 min-w-0">
-          <h3 className="font-semibold text-gray-900 truncate">{entry.title}</h3>
-          <p className="text-xs text-gray-400 mt-0.5">{date}</p>
+          <h3 className="font-display text-bloom-ink text-sm truncate">{entry.title}</h3>
+          <p className="text-xs text-bloom-muted font-sans mt-0.5">{date}</p>
         </div>
         <div className="flex items-center gap-2 shrink-0">
-          <span className="px-2 py-0.5 bg-indigo-100 text-indigo-700 text-xs font-bold rounded-full">
+          <span className="px-2 py-0.5 bg-bloom-ink text-bloom-bg text-xs font-display tracking-wide rounded-full">
             {entry.level}
           </span>
           <button
             onClick={() => onDelete(entry.id)}
-            className="text-gray-300 hover:text-red-400 transition-colors text-lg leading-none"
+            className="text-bloom-muted hover:text-[#CC2233] transition-colors text-lg leading-none cursor-pointer"
             title="Delete entry"
           >
             ×
@@ -30,19 +30,19 @@ export default function EntryCard({ entry, onDelete }) {
         </div>
       </div>
 
-      <p className="text-sm text-gray-500 line-clamp-2 mb-3">{entry.body}</p>
+      <p className="text-sm text-bloom-muted font-sans line-clamp-2 mb-3">{entry.body}</p>
 
       {hasResult ? (
         <div className="flex gap-2">
-          <span className="px-2 py-0.5 bg-red-50 text-red-600 text-xs rounded-full">
+          <span className="px-2 py-0.5 border border-[#CC2233] text-[#CC2233] text-xs rounded-full font-sans">
             {grammarCount} grammar
           </span>
-          <span className="px-2 py-0.5 bg-amber-50 text-amber-600 text-xs rounded-full">
+          <span className="px-2 py-0.5 border border-[#B85C00] text-[#B85C00] text-xs rounded-full font-sans">
             {vocabCount} vocab
           </span>
         </div>
       ) : (
-        <span className="text-xs text-gray-400 italic">No feedback yet</span>
+        <span className="text-xs text-bloom-muted font-sans italic">No feedback yet</span>
       )}
     </div>
   )
