@@ -60,12 +60,12 @@ function buildHighlightedSegments(text, grammar, vocabulary) {
   return segments
 }
 
-export default function ProofreadResult({ result, level }) {
+export default function ProofreadResult({ result, level, fillHeight = false }) {
   const [activeTab, setActiveTab] = useState('corrected')
 
   if (!result) {
     return (
-      <div className="flex flex-col items-center justify-center h-full text-center py-16 gap-3">
+      <div className={`flex flex-col items-center justify-center text-center py-16 gap-3 ${fillHeight ? 'h-full' : ''}`}>
         <p className="font-display text-bloom-ink text-lg uppercase tracking-wider">Proofread Result</p>
         <p className="text-sm text-bloom-muted font-sans">Write your diary and click <strong className="text-bloom-ink">Submit for Review</strong></p>
       </div>
@@ -81,7 +81,7 @@ export default function ProofreadResult({ result, level }) {
   )
 
   return (
-    <div className="flex flex-col h-full">
+    <div className={`flex flex-col ${fillHeight ? 'h-full' : ''}`}>
       {/* Header */}
       <div className="flex items-center justify-between mb-4">
         <h2 className="font-display text-bloom-ink uppercase tracking-wide text-base">Proofread Result</h2>
@@ -121,8 +121,8 @@ export default function ProofreadResult({ result, level }) {
         })}
       </div>
 
-      {/* Tab content */}
-      <div className="flex-1 overflow-y-auto">
+      {/* Tab content — overflow-y-scroll keeps scrollbar gutter reserved, preventing width shift when switching tabs */}
+      <div className={fillHeight ? 'flex-1 overflow-y-scroll min-h-0 w-full' : ''}>
         {activeTab === 'corrected' && (
           <div className="bg-bloom-bg border-2 border-bloom-ink rounded-xl px-4 py-3 text-sm text-bloom-ink leading-relaxed whitespace-pre-wrap font-sans">
             {segments.map((seg, i) =>

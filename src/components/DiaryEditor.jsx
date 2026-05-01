@@ -16,25 +16,25 @@ export default function DiaryEditor({
   }
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col gap-4 h-full">
+    <form onSubmit={handleSubmit} className="flex flex-col gap-4 h-full min-h-0">
       {/* Title */}
       <input
         type="text"
         placeholder="Title (optional)"
         value={title}
         onChange={(e) => setTitle(e.target.value)}
-        className="w-full px-3 py-2 border-2 border-bloom-ink bg-bloom-bg rounded-lg text-bloom-ink placeholder-bloom-muted focus:outline-none focus:ring-2 focus:ring-bloom-ink focus:ring-offset-1 text-sm font-sans"
+        className="w-full px-3 py-2 border-2 border-bloom-ink bg-bloom-bg rounded-lg text-bloom-ink placeholder-bloom-muted focus:outline-none focus:ring-2 focus:ring-bloom-ink focus:ring-offset-1 text-sm font-sans shrink-0"
       />
 
       {/* Body */}
-      <div className="flex-1 flex flex-col">
+      <div className="flex-1 flex flex-col min-h-0">
         <textarea
           placeholder="Write your diary entry here in English..."
           value={body}
           onChange={(e) => setBody(e.target.value)}
-          className="flex-1 w-full px-3 py-3 border-2 border-bloom-ink bg-bloom-bg rounded-lg text-bloom-ink placeholder-bloom-muted focus:outline-none focus:ring-2 focus:ring-bloom-ink focus:ring-offset-1 resize-none leading-relaxed min-h-64 font-sans"
+          className="flex-1 w-full px-3 py-3 border-2 border-bloom-ink bg-bloom-bg rounded-lg text-bloom-ink placeholder-bloom-muted focus:outline-none focus:ring-2 focus:ring-bloom-ink focus:ring-offset-1 resize-none leading-relaxed font-sans min-h-0"
         />
-        <p className="text-xs text-bloom-muted mt-1 text-right font-sans">{wordCount} words</p>
+        <p className="text-xs text-bloom-muted mt-1 text-right font-sans shrink-0">{wordCount} words</p>
       </div>
 
       {/* Level selector */}

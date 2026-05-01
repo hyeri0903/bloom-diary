@@ -39,10 +39,10 @@ export default function App() {
 
   return (
     <BrowserRouter>
-      <div className="min-h-screen bg-bloom-bg flex flex-col">
+      <div className="h-dvh bg-bloom-bg flex flex-col overflow-hidden">
         <Navbar />
         {/* <MarqueeBanner /> */}
-        <main className="flex-1">
+        <main className="flex-1 flex flex-col min-h-0">
           <Routes>
             <Route
               path="/"
